@@ -2,6 +2,7 @@
 
 ## 介绍 ##
 fxss-rate评分插件是基于jQuery的插件，支持全星、半星、小数星、未选中星等多种显示样式，并且支持评分操作，不过操作评分的时候仅支持全星评价。
+demo地址：[http://www.fxss5201.cn/project/plugin/fxss-rate/](http://www.fxss5201.cn/project/plugin/fxss-rate/)
 
 ## 资源 ##
 
