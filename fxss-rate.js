@@ -1,3 +1,9 @@
+/** 
+ * fxss-rate评分插件是基于jQuery的插件，支持全星、半星、小数星、未选中星等多种显示样式，并且支持评分操作，不过操作评分的时候仅支持全星评价。
+ * time：2018-09-07
+ * by 樊小书生: http://www.fxss5201.cn/
+ * github: https://github.com/fxss5201/fxss-rate
+ */
 ;
 (function(){
     $.fn.rateDefaults = {
