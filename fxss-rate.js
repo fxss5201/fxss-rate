@@ -70,7 +70,11 @@
             rateBoxHtml = rateHtmlTpl.replace('{{rateHtmlTpl}}', rateHtml);
 
             var textStyle = (_this.theme ? 'color:' + _this.theme : '') + ';' + (_this.size ? 'font-size:' + _this.size : '') + ';';
-            rateBoxHtml = _this.text ? rateBoxHtml.replace('{{textTpl}}', '<div class="fxss_rate_text" style="' + textStyle + '">' + _this.countText() + '</div>') : rateBoxHtml.replace('{{textTpl}}', '');
+            rateBoxHtml = _this.text 
+                ? (_this.value > 0 
+                    ? rateBoxHtml.replace('{{textTpl}}', '<div class="fxss_rate_text" style="' + textStyle + '">' + _this.countText() + '</div>')
+                    : rateBoxHtml.replace('{{textTpl}}', '')) 
+                : rateBoxHtml.replace('{{textTpl}}', '');
 
             $(initBox).html(rateBoxHtml);
 
