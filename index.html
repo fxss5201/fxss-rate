@@ -127,7 +127,7 @@
     });
 &lt;/script&gt;</code></pre>
             </div>
-            <h3 class="h3-title">3、使用 change 方法重新渲染：</h3>
+            <h3 class="h3-title">3、动态rate示例：</h3>
             <div class="paragraph padding-left-20">
                 <label class="label">
                     <span class="first">type:</span>
@@ -190,21 +190,17 @@
                     var option = {
                         length: 10,
                         value: 5.5,
-                        readonly: false
-                    };
-                    $("#rateBox3").rate({
-                        length: 10,
-                        value: 5.5,
                         readonly: false,
                         selectClass: 'fxss_rate_select',
                         incompleteClass: 'fxss_rate_no_all_select',
                         customClass: 'custom_class',
-                        callback: function(object){
+                        callback: function (object) {
                             console.log(object);
                             option.value = object.index + 1;
                             $("#value").val(option.value);
                         }
-                    });
+                    };
+                    $("#rateBox3").rate(option);
                     $("#type, #length, #value, #size, #gutter").on("input", function(event) {
                         var target = event.target,
                             id = target.id;
@@ -226,7 +222,7 @@
                                 option.gutter = $("#" + id).val() + 'px';
                                 break;
                         }
-                        $("#rateBox3").change(option);
+                        $("#rateBox3").empty().rate(option);
                     });
 
                     $("#half, #decimal, #readonly, #hover, #text, #theme").on("change", function(event) {
@@ -252,7 +248,7 @@
                                 option.theme = $("#" + id).val();
                                 break;
                         }
-                        $("#rateBox3").change(option);
+                        $("#rateBox3").empty().rate(option);
                     });
                 </script>
             </div>

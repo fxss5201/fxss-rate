@@ -6,7 +6,6 @@
  */
 ;
 (function(){
-    var options;
     $.fn.rateDefaults = {
         version: '0.0.1', // 版本号
         type: 0, // 星级的渲染方式，0：svg  1：Font class  2：Unicode，为兼容以前版本，默认采用svg渲染
@@ -187,7 +186,7 @@
     };
     
     $.fn.rate = function(option){
-        options = $.extend({}, $.fn.rateDefaults, option);
+        var options = $.extend({}, $.fn.rateDefaults, option);
         options.link('rate.css', 'rateLink');
         if(options.type * 1 === 0){
             options.script('need/iconfont.js', 'rateIconfontSvg');
@@ -196,19 +195,6 @@
         }
         this.each(function(index, element) {
             options.validate();
-            options.render(element, options.type);
-        });
-        return this;
-    };
-
-    $.fn.change = function(option){
-        options = $.extend({}, options, option);
-        if(options.type * 1 === 0){
-            options.script('need/iconfont.js', 'rateIconfontSvg');
-        }else{
-            options.link('need/iconfont.css', 'rateIconfontCss');
-        }
-        this.each(function(index, element) {
             options.render(element, options.type);
         });
         return this;
