@@ -46,13 +46,36 @@
         .padding-left-20 {
             padding-left: 20px;
         }
+        .label {
+            display: block;
+            margin-bottom: 10px;
+            line-height: 30px;
+        }
+        .label span.first {
+            display: inline-block;
+            width: 90px;
+            text-align: right;
+            margin-right: 10px;
+        }
+        .label span.end {
+            display: inline-block;
+            margin-left: 10px;
+        }
+        .label input {
+            vertical-align: top;
+            box-sizing: border-box;
+            height: 30px;
+            padding: 0 10px;
+        }
+        .label input[type="checkbox"] {
+            width: 30px;
+            height: 30px;
+        }
     </style>
-    <link rel="stylesheet" href="fxss-rate.css">
     <script src="http://www.fxss5201.cn/project/js/jquery-1.11.3.js"></script>
     <script src="http://www.fxss5201.cn/project/layui/layui.all.js"></script>
     <script src="http://www.fxss5201.cn/project/js/highlight.pack.js"></script>
-    <script src="fxss-rate-iconfont.js"></script>
-    <script src="fxss-rate.js"></script>
+    <script src="fxss-rate/rate.js"></script>
 </head>
 <body>
     <div class="layui-container">
@@ -60,24 +83,38 @@
         <hr>
         <h2 class="h2-title">1、演示</h2>
         <div class="paragraph padding-left-20">
-            <div id="rateBox"></div>
-            <script>
-                $("#rateBox").rate({
-                    length: 10,
-                    value: 5.5,
-                    readonly: false,
-                    selectClass: 'fxss_rate_select',
-                    incompleteClass: 'fxss_rate_no_all_select',
-                    customClass: 'custom_class',
-                    callback: function(object){
-                        console.log(object)
-                    }
-                });
-            </script>
-            <h3 class="h3-title">代码如下：</h3>
-            <pre class="margin-bottom-5"><code class="html">&lt;div id="rateBox"&gt;&lt;/div&gt;
+            <h3 class="h3-title">1、全部采用默认值的调用：</h3>
+            <div class="paragraph padding-left-20">
+                <div id="rateBox1"></div>
+                <script>
+                    $("#rateBox1").rate();
+                </script>
+                <h3 class="h3-title">代码如下：</h3>
+                <pre class="margin-bottom-5"><code class="html">&lt;div id="rateBox1"&gt;&lt;/div&gt;
 &lt;script&gt;
-    $("#rateBox").rate({
+    $("#rateBox1").rate();
+&lt;/script&gt;</code></pre>
+            </div>
+            <h3 class="h3-title">2、设置部分参数：</h3>
+            <div class="paragraph padding-left-20">
+                <div id="rateBox2"></div>
+                <script>
+                    $("#rateBox2").rate({
+                        length: 10,
+                        value: 5.5,
+                        readonly: false,
+                        selectClass: 'fxss_rate_select',
+                        incompleteClass: 'fxss_rate_no_all_select',
+                        customClass: 'custom_class',
+                        callback: function(object){
+                            console.log(object)
+                        }
+                    });
+                </script>
+                <h3 class="h3-title">代码如下：</h3>
+                <pre class="margin-bottom-5"><code class="html">&lt;div id="rateBox2"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#rateBox2").rate({
         length: 10,
         value: 5.5,
         readonly: false,
@@ -89,27 +126,148 @@
         }
     });
 &lt;/script&gt;</code></pre>
+            </div>
+            <h3 class="h3-title">3、使用 change 方法重新渲染：</h3>
+            <div class="paragraph padding-left-20">
+                <label class="label">
+                    <span class="first">type:</span>
+                    <input id="type" value="0" type="number" min="0" max="2" />
+                    <span class="end">星级的渲染方式</span>
+                </label>
+                <label class="label">
+                    <span class="first">length:</span>
+                    <input id="length" value="10" type="number" min="0" />
+                    <span class="end">初始长度</span>
+                </label>
+                <label class="label">
+                    <span class="first">value:</span>
+                    <input id="value" value="5.5" type="number" min="0" step="0.1" />
+                    <span class="end">选中星星的个数</span>
+                </label>
+                <label class="label">
+                    <span class="first">half:</span>
+                    <input id="half" type="checkbox" checked />
+                    <span class="end">是否显示半星（仅做显示处理）</span>
+                </label>
+                <label class="label">
+                    <span class="first">decimal:</span>
+                    <input id="decimal" type="checkbox" checked />
+                    <span class="end">是否根据小数来显示小数星（仅做显示处理，优先级高于half）</span>
+                </label>
+                <label class="label">
+                    <span class="first">readonly:</span>
+                    <input id="readonly" type="checkbox" />
+                    <span class="end">是否只读</span>
+                </label>
+                <label class="label">
+                    <span class="first">hover:</span>
+                    <input id="hover" type="checkbox" />
+                    <span class="end">鼠标移到星级上是否显示当前的value值</span>
+                </label>
+                <label class="label">
+                    <span class="first">text:</span>
+                    <input id="text" type="checkbox" checked />
+                    <span class="end">是否显示对应的文字描述</span>
+                </label>
+                <label class="label">
+                    <span class="first">theme:</span>
+                    <input id="theme" value="#FFB800" type="color" />
+                    <span class="end">主题色</span>
+                </label>
+                <label class="label">
+                    <span class="first">size:</span>
+                    <input id="size" value="20" type="number" />
+                    <span class="end">星星以及文字描述的大小（此项设置时需要px单位，此处为了演示，采用input，会在代码中添加）</span>
+                </label>
+                <label class="label">
+                    <span class="first">gutter:</span>
+                    <input id="gutter" value="3" type="number" />
+                    <span class="end">两颗星星之间的距离/2，原理是设置margin: 0 gutter;</span>
+                </label>
+
+                <div id="rateBox3"></div>
+                <script>
+                    $("#rateBox3").rate({
+                        length: 10,
+                        value: 5.5,
+                        readonly: false,
+                        selectClass: 'fxss_rate_select',
+                        incompleteClass: 'fxss_rate_no_all_select',
+                        customClass: 'custom_class',
+                        callback: function(object){
+                            console.log(object)
+                        }
+                    });
+                    var option = {
+                        length: 10,
+                        value: 5.5,
+                        readonly: false
+                    };
+                    $("#type, #length, #value, #size, #gutter").on("input", function(event) {
+                        var target = event.target,
+                            id = target.id;
+                        switch(id){
+                            case 'type':
+                                option.type = $("#" + id).val();
+                                break;
+                            case 'length':
+                                option.length = $("#" + id).val();
+                                break;
+                            case 'value':
+                                option.value = $("#" + id).val();
+                                $("#" + id).attr("max", $("#length").val());
+                                break;
+                            case 'size':
+                                option.size = $("#" + id).val() + 'px';
+                                break;
+                            case 'gutter':
+                                option.gutter = $("#" + id).val() + 'px';
+                                break;
+                        }
+                        $("#rateBox3").change(option);
+                    });
+
+                    $("#half, #decimal, #readonly, #hover, #text, #theme").on("change", function(event) {
+                        var target = event.target,
+                            id = target.id;
+                        switch(id){
+                            case 'half':
+                                option.half = $("#" + id).prop("checked");
+                                break;
+                            case 'decimal':
+                                option.decimal = $("#" + id).prop("checked");
+                                break;
+                            case 'readonly':
+                                option.readonly = $("#" + id).prop("checked");
+                                break;
+                            case 'hover':
+                                option.hover = $("#" + id).prop("checked");
+                                break;
+                            case 'text':
+                                option.text = $("#" + id).prop("checked");
+                                break;
+                            case 'theme':
+                                option.theme = $("#" + id).val();
+                                break;
+                        }
+                        $("#rateBox3").change(option);
+                    });
+                </script>
+            </div>
         </div>
         <h2 class="h2-title">2、介绍</h2>
         <p class="paragraph padding-left-20">fxss-rate评分插件是基于jQuery的插件，支持全星、半星、小数星、未选中星等多种显示样式，并且支持评分操作，不过操作评分的时候仅支持全星评价。</p>
-        <h2 class="h2-title">3、资源</h2>
+        <h2 class="h2-title">3、使用</h2>
         <div class="paragraph padding-left-20">
-            <h3 class="h3-title">1、首先需要引入样式文件：</h3>
-            <pre class="margin-bottom-5"><code class="html">&lt;link rel="stylesheet" href="fxss-rate.css"&gt;</code></pre>
-            <h3 class="h3-title">2、基于jQuery，需要引入jQuery文件：</h3>
+            <h3 class="h3-title">1、基于jQuery，需要引入jQuery文件：</h3>
             <pre class="margin-bottom-5"><code class="html">&lt;script src="js/jquery-1.11.3.js"&gt;&lt;/script&gt;</code></pre>
-            <h3 class="h3-title">3、渲染星星使用的是阿里矢量图库的svg字体，所以还需要引入字体文件：</h3>
-            <pre class="margin-bottom-5"><code class="html">&lt;script src="fxss-rate-iconfont.js"&gt;&lt;/script&gt;</code></pre>
-            <h3 class="h3-title">4、接下来引入我们的评分插件：</h3>
-            <pre class="margin-bottom-5"><code class="html">&lt;script src="fxss-rate.js"&gt;&lt;/script&gt;</code></pre>
-        </div>
-        <h2 class="h2-title">4、使用</h2>
-        <div class="paragraph padding-left-20">
-            <h3 class="h3-title">1、在使用的时候，需要一个容器，例如：</h3>
+            <h3 class="h3-title">2、接下来引入我们的评分插件：</h3>
+            <pre class="margin-bottom-5"><code class="html">&lt;script src="fxss-rate/rate.js"&gt;&lt;/script&gt;</code></pre>
+            <h3 class="h3-title">3、在使用的时候，需要一个容器，例如：</h3>
             <pre class="margin-bottom-5"><code class="html">&lt;div id="rateBox"&gt;&lt;/div&gt;</code></pre>
-            <h3 class="h3-title">2、然后在 JavaScript 中进行初始化：</h3>
+            <h3 class="h3-title">4、然后在 JavaScript 中进行初始化：</h3>
             <pre class="margin-bottom-5"><code class="javascript">$("#rateBox").rate();</code></pre>
-            <h3 class="h3-title">3、上面这种事最简单的使用，所有的参数都会使用默认参数。也可以自有配置参数，比如将其设置为可操作的并且增加点击回调函数：</h3>
+            <h3 class="h3-title">5、上面这种事最简单的使用，所有的参数都会使用默认参数。也可以自有配置参数，比如将其设置为可操作的并且增加点击回调函数：</h3>
             <pre class="margin-bottom-5"><code class="javascript">$("#rateBox").rate({
     readonly: false,
     callback: function(object){
@@ -117,13 +275,14 @@
     }
 });</code></pre>
         </div>
-        <h2 class="h2-title">5、参数</h2>
+        <h2 class="h2-title">4、参数</h2>
         <div class="paragraph padding-left-20">
             <table class="layui-table">
                 <colgroup>
                     <col width="80">
                     <col width="80">
                     <col width="200">
+                    <col width="100">
                     <col>
                 </colgroup>
                 <thead>
@@ -131,93 +290,122 @@
                         <th>参数名</th>
                         <th>类型</th>
                         <th>默认值</th>
+                        <th>何时添加</th>
                         <th>描述</th>
                     </tr>
                 </thead>
                 <tbody class="layui-text">
                     <tr>
+                        <td>type</td>
+                        <td>Number</td>
+                        <td>0</td>
+                        <td>0.0.1</td>
+                        <td>星级的渲染方式，0：svg，1：Font class，2：Unicode</td>
+                    </tr>
+                    <tr>
                         <td>length</td>
                         <td>Number</td>
                         <td>5</td>
+                        <td>beta</td>
                         <td>初始长度，即渲染几颗星。</td>
                     </tr>
                     <tr>
                         <td>value</td>
                         <td>Number</td>
                         <td>3.5</td>
+                        <td>beta</td>
                         <td>选中星星的个数，介于0和length之间，如果想要显示半颗行或者小数星，还需要设置相应的half/decimal，否则仅会显示整数部分</td>
                     </tr>
                     <tr>
                         <td>half</td>
                         <td>Boolean</td>
                         <td>true</td>
+                        <td>beta</td>
                         <td>是否显示半星（仅做显示处理）</td>
                     </tr>
                     <tr>
                         <td>decimal</td>
                         <td>Boolean</td>
                         <td>true</td>
+                        <td>beta</td>
                         <td>是否根据小数来显示小数星（仅做显示处理，优先级高于half）</td>
                     </tr>
                     <tr>
                         <td>readonly</td>
                         <td>Boolean</td>
                         <td>true</td>
+                        <td>beta</td>
                         <td>是否只读，如果设置为只读，则设置callback回调函数也无用。</td>
+                    </tr>
+                    <tr>
+                        <td>hover</td>
+                        <td>Boolean</td>
+                        <td>false</td>
+                        <td>0.0.1</td>
+                        <td>鼠标移到星级上是否显示当前的value值，此版本使用简单的标签title表示。</td>
                     </tr>
                     <tr>
                         <td>text</td>
                         <td>Boolean</td>
                         <td>true</td>
+                        <td>beta</td>
                         <td>是否显示对应的文字描述。</td>
                     </tr>
                     <tr>
                         <td>textList</td>
                         <td>Array</td>
                         <td>['极差', '差', '中等', '好', '非常好']</td>
+                        <td>beta</td>
                         <td>文字描述，可以自己设置，建议与length保持整除关系。</td>
                     </tr>
                     <tr>
                         <td>theme</td>
                         <td>String</td>
                         <td>'#FFB800'</td>
+                        <td>beta</td>
                         <td>主题色</td>
                     </tr>
                     <tr>
                         <td>size</td>
                         <td>String</td>
                         <td>'20px'</td>
+                        <td>beta</td>
                         <td>星星以及文字描述的大小</td>
                     </tr>
                     <tr>
                         <td>gutter</td>
                         <td>String</td>
                         <td>'3px'</td>
+                        <td>beta</td>
                         <td>两颗星星之间的距离/2，原理是设置margin: 0 gutter;</td>
                     </tr>
                     <tr>
                         <td>selectClass</td>
                         <td>String</td>
                         <td>'fxss_rate_select'</td>
+                        <td>beta</td>
                         <td>星星选中的样式class名称，可以在此class中设置自定义样式</td>
                     </tr>
                     <tr>
                         <td>incompleteClass</td>
                         <td>String</td>
                         <td>''</td>
+                        <td>beta</td>
                         <td>星星未完全选中的样式名称，主要针对半星和小数星</td>
                     </tr>
                     <tr>
                         <td>customClass</td>
                         <td>String</td>
                         <td>''</td>
+                        <td>beta</td>
                         <td>自定义class，会添加在fxss_rate_wrapper标签上面，可以利用css权重来重置css样式</td>
                     </tr>
                     <tr>
                         <td>callback</td>
                         <td>Function</td>
                         <td></td>
-                        <td>星星点击的回调函数，参数object包含当前的id、点击的星星的index</td>
+                        <td>beta</td>
+                        <td>星星点击的回调函数，参数object包含当前的DOM元素、点击的星星的index</td>
                     </tr>
                 </tbody>
             </table>

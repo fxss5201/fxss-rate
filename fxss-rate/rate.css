@@ -1,0 +1,35 @@
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: " ";
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix{
+    *zoom: 1;
+}
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+.rate_wrapper {
+    position: relative;
+}
+.rate_box {
+    display: inline-block;
+}
+.rate_item {
+    float: left;
+    cursor: pointer;
+    font-size: 0;
+    line-height: 1;
+}
+.rate_text {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 1;
+    margin-left: 15px;
+}
