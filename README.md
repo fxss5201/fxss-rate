@@ -3,6 +3,7 @@
 ![](https://img.shields.io/badge/language-javascript-green.svg)
 ![](https://img.shields.io/badge/Dependencies-jQuery-brightgreen.svg)
 ![](https://img.shields.io/badge/license-MIT-blue.svg)
+[![](https://codebeat.co/assets/svg/badges/A-398b39-669406e9e1b136187b91af587d4092b0160370f271f66a651f444b990c2730e9.svg)](https://codebeat.co/projects/github-com-fxss5201-fxss-rate-master)
 
 ## 介绍 ##
 
