@@ -256,6 +256,50 @@
                     });
                 </script>
             </div>
+            <h3 class="h3-title">4、列表渲染：</h3>
+            <div class="paragraph padding-left-20">
+                <ul>
+                    <li class="js-rate-box" data-value="2" data-length="5" data-theme="#5FB878"></li>
+                    <li class="js-rate-box" data-value="6.3" data-length="10" data-theme="#ff0000"></li>
+                    <li class="js-rate-box" data-value="8.8" data-length="10" data-theme="blue"></li>
+                </ul>
+                <script>
+                    var $rateBoxList = $(".js-rate-box");
+                    for(var i = 0,len = $rateBoxList.length; i < len; i++){
+                        var $currentRateBox = $rateBoxList.eq(i);
+                        $currentRateBox.rate({
+                            length: $currentRateBox.attr('data-length'),
+                            value: $currentRateBox.attr('data-value'),
+                            readonly: false,
+                            theme: $currentRateBox.attr('data-theme'),
+                            callback: function(object){
+                                console.log(object)
+                            }
+                        });
+                    }
+                </script>
+                <h3 class="h3-title">代码如下：</h3>
+                <pre class="margin-bottom-5"><code class="html">&lt;ul&gt;
+    &lt;li class="js-rate-box" data-value="2" data-length="5" data-theme="#5FB878"&gt;&lt;/li&gt;
+    &lt;li class="js-rate-box" data-value="6.3" data-length="10" data-theme="#ff0000"&gt;&lt;/li&gt;
+    &lt;li class="js-rate-box" data-value="8.8" data-length="10" data-theme="blue"&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    var $rateBoxList = $(".js-rate-box");
+    for(var i = 0,len = $rateBoxList.length; i < len; i++){
+        var $currentRateBox = $rateBoxList.eq(i);
+        $currentRateBox.rate({
+            length: $currentRateBox.attr('data-length'),
+            value: $currentRateBox.attr('data-value'),
+            readonly: false,
+            theme: $currentRateBox.attr('data-theme'),
+            callback: function(object){
+                console.log(object)
+            }
+        });
+    }
+&lt;/script&gt;</code></pre>
+            </div>
         </div>
         <h2 class="h2-title">2、介绍</h2>
         <p class="paragraph padding-left-20">fxss-rate评分插件是基于jQuery的插件，支持全星、半星、小数星、未选中星等多种显示样式，并且支持评分操作，不过操作评分的时候仅支持全星评价。</p>

@@ -26,10 +26,10 @@
         customClass: '', // 自定义class
         validate: function(){
             var _this = this;
-            if(_this.value > _this.length){
+            if(_this.value * 1 > _this.length * 1){
                 alert('value应小于等于length');
             }
-            if(_this.textList.length > _this.length){
+            if(_this.textList.length > _this.length * 1){
                 alert('textList.length应小于等于length');
             }
         },
